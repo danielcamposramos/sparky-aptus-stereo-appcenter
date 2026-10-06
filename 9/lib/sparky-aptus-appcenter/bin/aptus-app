@@ -616,6 +616,21 @@ elif [ "$1" = "dooble" ]; then
 		SYSTEM="wrong"
 	fi
 	PACKAGE="$1"
+elif [ "$1" = "zoom" ]; then
+	# closed: Zoom's own package, installed by aptus-package-install after a SHA-256 check; never redistributed by us
+	if [ "$ARCH64" = "" ]; then
+		SYSTEM="wrong"
+	fi
+	PACKAGE="$1"
+elif [ "$1" = "draw.io" ]; then
+	# upstream's own .deb (jgraph/drawio-desktop), installed after a SHA-256 check
+	if [ "$ARCH64" = "" ]; then
+		SYSTEM="wrong"
+	fi
+	PACKAGE="$1"
+elif [ "$1" = "phoronix-test-suite" ]; then
+	# Sparky Stereo OS package, from upstream's tag
+	PACKAGE="$1"
 elif [ "$1" = "google-chrome-stable" ]; then
 	if [ "$ARCH64" = "" ]; 	then
 		SYSTEM="wrong"
@@ -1041,6 +1056,10 @@ if [ "$DESCRIPTION2" = "" ]; then
 	#	DESCRIPTION2="$LOCAL075"
 	if [ "$1" = "google-chrome-stable" ]; then
 		DESCRIPTION2="$LOCAL075"
+	elif [ "$1" = "zoom" ]; then
+		DESCRIPTION2="$LOCAL075"
+	elif [ "$1" = "draw.io" ]; then
+		DESCRIPTION2="$LOCAL075"
 	elif [ "$1" = "google-earth-pro-stable" ]; then
 		DESCRIPTION2="$LOCAL075"
 	elif [ "$1" = "openoffice" ]; then
@@ -1080,6 +1099,42 @@ CHECKPACKAGE0=`apt-cache policy $PACKAGE | head -n2 | tail -n1 | grep [0-9]`
 #
 # install, reinstall or remove google-chrome
 if [ "$1" = "google-chrome-stable" ]; then
+	if [ "$CHECKPACKAGE0" != "" ]; then
+		PACKTITLE="Remove or Reinstall Package"
+		PACKTEXT="$LOCAL011 $LOCAL012"
+		PACKBUTTONS="<a href="aptus://debremo_$1" class="buttonmenu">$LOCAL008</a>&nbsp;&nbsp; <a href="aptus://debrein_$1" class="buttonmenu">$LOCAL009</a>&nbsp;&nbsp; <a href="aptus://idzi_idzi" class="buttonmenu">$LOCAL001</a><br />"
+	elif [ "$CHECKPACKAGE0" = "" ]; then
+		if [ "$PINGTEST" = "" ]; then
+			PACKTITLE="Install Package"
+			PACKTEXT="$LOCAL003 $LOCAL005"
+			PACKBUTTONS="<a href="aptus://idzi_idzi" class="buttonmenu">$LOCAL001</a><br />"
+		else
+			PACKTITLE="Install Package"
+			PACKTEXT="$LOCAL014"
+			PACKBUTTONS="<a href="aptus://debinst_$1" class="buttonmenu">$LOCAL010</a>&nbsp;&nbsp; <a href="aptus://idzi_idzi" class="buttonmenu">$LOCAL001</a><br />"
+		fi
+	fi
+
+# install, reinstall or remove zoom
+elif [ "$1" = "zoom" ]; then
+	if [ "$CHECKPACKAGE0" != "" ]; then
+		PACKTITLE="Remove or Reinstall Package"
+		PACKTEXT="$LOCAL011 $LOCAL012"
+		PACKBUTTONS="<a href="aptus://debremo_$1" class="buttonmenu">$LOCAL008</a>&nbsp;&nbsp; <a href="aptus://debrein_$1" class="buttonmenu">$LOCAL009</a>&nbsp;&nbsp; <a href="aptus://idzi_idzi" class="buttonmenu">$LOCAL001</a><br />"
+	elif [ "$CHECKPACKAGE0" = "" ]; then
+		if [ "$PINGTEST" = "" ]; then
+			PACKTITLE="Install Package"
+			PACKTEXT="$LOCAL003 $LOCAL005"
+			PACKBUTTONS="<a href="aptus://idzi_idzi" class="buttonmenu">$LOCAL001</a><br />"
+		else
+			PACKTITLE="Install Package"
+			PACKTEXT="$LOCAL014"
+			PACKBUTTONS="<a href="aptus://debinst_$1" class="buttonmenu">$LOCAL010</a>&nbsp;&nbsp; <a href="aptus://idzi_idzi" class="buttonmenu">$LOCAL001</a><br />"
+		fi
+	fi
+
+# install, reinstall or remove draw.io
+elif [ "$1" = "draw.io" ]; then
 	if [ "$CHECKPACKAGE0" != "" ]; then
 		PACKTITLE="Remove or Reinstall Package"
 		PACKTEXT="$LOCAL011 $LOCAL012"

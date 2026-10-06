@@ -59,6 +59,13 @@ SERVERE="https://dl.google.com/dl/earth/client/current"
 PACKE64="google-earth-pro-stable_current_amd64.deb"
 SERVER64SKYPE="https://go.skype.com"
 PACK64SKYPE="skypeforlinux-64.deb"
+# vendor packages, pinned: the version and the SHA-256 checked before anything is installed (Sparky Stereo OS)
+SERVERZOOM="https://cdn.zoom.us/prod/7.2.1.5760"
+PACKZOOM="zoom_amd64.deb"
+SHAZOOM="e9a522c794622633b24908ac0589a8e4df8a542846b97818e76f6c27e117cbdb"
+SERVERDRAWIO="https://github.com/jgraph/drawio-desktop/releases/download/v31.7.0"
+PACKDRAWIO="drawio-amd64-31.7.0.deb"
+SHADRAWIO="eb9695e208fcc5ccfbfc496aa8ab2f52a273297d83715de2177b231c172c13de"
 OOPACKAGES="openoffice-brand-en-us openoffice-brand-writer openoffice-brand-calc openoffice-brand-impress openoffice-brand-base openoffice-brand-draw openoffice-brand-math openoffice-pyuno openoffice-ooofonts openoffice-ooolinguistic openoffice-debian-menus"
 WPSPACKAGES="wps-office-fonts"
 if [ -f /usr/bin/spterm ]; then
@@ -114,6 +121,30 @@ elif [ "$PACKAGE" = "microsoft-edge-stable" ]; then
 	echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge/ stable main" >> /etc/apt/sources.list.d/microsoft-edge.list
 	$SPARKYXTERM "$UPDATE"
 	$SPARKYXTERM "$INSTALL $PACKAGE && echo 'Done, press <ENTER> to exit...' && read"
+	rm -rf $WORKDIR
+
+elif [ "$PACKAGE" = "zoom" ]; then
+	rm -rf $WORKDIR
+	mkdir -p $WORKDIR
+	cd $WORKDIR
+	$SPARKYXTERM "wget -O $PACKZOOM $SERVERZOOM/$PACKZOOM"
+	if echo "$SHAZOOM  $PACKZOOM" | sha256sum -c - >/dev/null 2>&1; then
+		$SPARKYXTERM "$INSTALL ./$PACKZOOM && echo 'Done, press <ENTER> to exit...' && read"
+	else
+		$SPARKYXTERM "echo 'The SHA-256 of the download does not match the one pinned in this program. Nothing was installed.' && echo 'Press <ENTER> to exit...' && read"
+	fi
+	rm -rf $WORKDIR
+
+elif [ "$PACKAGE" = "draw.io" ]; then
+	rm -rf $WORKDIR
+	mkdir -p $WORKDIR
+	cd $WORKDIR
+	$SPARKYXTERM "wget -O $PACKDRAWIO $SERVERDRAWIO/$PACKDRAWIO"
+	if echo "$SHADRAWIO  $PACKDRAWIO" | sha256sum -c - >/dev/null 2>&1; then
+		$SPARKYXTERM "$INSTALL ./$PACKDRAWIO && echo 'Done, press <ENTER> to exit...' && read"
+	else
+		$SPARKYXTERM "echo 'The SHA-256 of the download does not match the one pinned in this program. Nothing was installed.' && echo 'Press <ENTER> to exit...' && read"
+	fi
 	rm -rf $WORKDIR
 
 elif [ "$PACKAGE" = "openoffice" ]; then

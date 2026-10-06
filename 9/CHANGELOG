@@ -1,4 +1,9 @@
 -------------------------------------------------------------------------------
+  Version 20261006~sparky9~0 (2026-10-06)
+-------------------------------------------------------------------------------
+  * added packages draw.io, zoom (vendor packages, installed after a pinned SHA-256 check), phoronix-test-suite (Sparky Stereo OS repository)
+
+-------------------------------------------------------------------------------
   Version 20261005~sparky9~0 (2026-10-05)
 -------------------------------------------------------------------------------
   * added package vibe (Sparky Stereo OS repository)
