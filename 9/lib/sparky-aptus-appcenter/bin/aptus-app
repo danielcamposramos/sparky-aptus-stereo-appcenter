@@ -783,6 +783,12 @@ elif [ "$1" = "imaginer" ]; then
 		SYSTEM="wrong"
 	fi
 	PACKAGE="$1"
+elif [ "$1" = "vibe" ]; then
+	# offline transcription; Sparky Stereo OS package (upstream's signed release), amd64 only
+	if [ "$ARCH64" = "" ]; then
+		SYSTEM="wrong"
+	fi
+	PACKAGE="$1"
 
 # accesories other
 elif [ "$1" = "bemenu" ]; then
