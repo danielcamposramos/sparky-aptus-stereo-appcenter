@@ -1,3 +1,27 @@
+Sparky Stereo OS:
+-----------------
+
+This is the stereo version of Sparky APTus AppCenter by Sparky Stereo OS, forked
+from sparkylinux/sparky-aptus-appcenter
+(https://github.com/sparkylinux/sparky-aptus-appcenter). It adds the edition's
+entries to the application catalogue.
+
+Where it comes from:
+
+- Sparky APTus AppCenter (https://github.com/sparkylinux/sparky-aptus-appcenter)
+  is made by Paweł Pijanowski and others; see the copyright file.
+- Debian (https://www.debian.org/) is the base of the system.
+- SparkyLinux (https://sparkylinux.org/), by Paweł "pavroo" Pijanowski, builds
+  on Debian.
+- Sparky Stereo OS (https://github.com/Sparky-OS/sparky-stereo-os) is the stereo
+  3D edition of SparkyLinux: SparkyOS, powered by Debian.
+
+The master branch holds the version the distribution builds. The licence is
+unchanged: GNU GPL version 3 or later, as stated below.
+
+Sparky Stereo OS, Daniel Ramos's edition of SparkyLinux (by Paweł "pavroo" Pijanowski).
+
+
 Sparky APTus AppCenter
 This tool helps you keep your system up to date and clean, install and remove packages. It is a lightweight gui frontend to APT and DPKG tools.
 
